@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(ShellAssignment)
 
-include_directories(include/)
+include_directorie(include/)
 
 file(GLOB SHELL_SOURCES src/*.c)
 
-add_executable(shell src/main.c)
+add_executable(shell ${SHELL_SOURCES})
 
 target_link_libraries(shell m)
 

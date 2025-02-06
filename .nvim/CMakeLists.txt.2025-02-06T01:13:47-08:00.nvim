@@ -4,16 +4,6 @@ cmake_minimum_required(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(ShellAssignment)
-
-include_directories(include/)
-
-file(GLOB SHELL_SOURCES src/*.c)
-
-add_executable(shell src/main.c)
-
-target_link_libraries(shell m)
-
 include(FetchContent)
 FetchContent_Declare(
   googletest

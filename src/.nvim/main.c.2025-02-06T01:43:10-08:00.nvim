@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+void print_prompt() {
+
+  char curr_dir[1024];
+
+  if (getcwd(curr_dir, sizeof(curr_dir)) != NULL) {
+    
+
+
+  }
+}

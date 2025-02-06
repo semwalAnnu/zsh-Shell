@@ -10,7 +10,7 @@ include_directories(include/)
 
 file(GLOB SHELL_SOURCES src/*.c)
 
-add_executable(shell src/main.c)
+add_executable(shell ${SHELL_SOURCES})
 
 target_link_libraries(shell m)
 
