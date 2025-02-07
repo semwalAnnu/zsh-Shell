@@ -4,20 +4,20 @@
 #include <unistd.h>
 #include <wait.h>
 
-void execute(char *input) {
+void execute(char input[]) {
 
   char *token;
   char *saveptr;
 
   int mode = 0; // 0 for foreground, 1 for background
 
-  token = strtok_r(input, " ", &saveptr);
+  token = strtok_s(input, " ", &saveptr);
 
-  int argc = 0;
+   int argc = 0;
   char *argv[100];
   while (token != NULL) {
     argv[argc++] = token;
-    token = strtok_r(NULL, " ", &saveptr);
+    token = strtok_s(NULL, " ", &saveptr);
   }
 
   if (argc > 0 && strcmp(argv[argc - 1], "&") == 0) {
@@ -27,7 +27,7 @@ void execute(char *input) {
     argv[argc] = NULL;
   }
 
-  if (argv[0] == NULL) {
+  if(argv[0] == NULL){
     return;
   }
 
@@ -49,10 +49,11 @@ void execute(char *input) {
     }
 
   } else {
-
-    if (execvp(argv[0], argv) == -1) {
-      write(STDERR_FILENO, "shell: unable to execute command\n", 33);
-      exit(EXIT_FAILURE);
-    }
+      
+    if(execvp(argv[0], argv) == -1){
+        write(STDERR_FILENO, "shell: unable to execute command\n", 33);
+        exit(EXIT_FAILURE);
+      
   }
+}
 }

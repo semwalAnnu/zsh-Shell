@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <wait.h>
 
-void execute(char *input) {
+void execute(char input[]) {
 
   char *token;
   char *saveptr;

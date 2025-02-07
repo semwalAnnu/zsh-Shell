@@ -1,0 +1,13 @@
+#ifndef EXECUTE_H
+#define EXECUTE_H
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <wait.h>
+
+void execute(char *input);
+
+#endif
+
