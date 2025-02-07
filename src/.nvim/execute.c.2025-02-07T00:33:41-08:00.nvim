@@ -27,8 +27,8 @@ void execute(char input[]) {
     token = strtok_r(NULL, " ", &saveptr);
   }
 
-  if (argc > 0 && strcmp(argv[argc - 1], "&") == 0) {
-    mode = 1;
+  if(argc > 0 && strcmp(argv[argc -1], "&") == 0){
+    background = 1;
     argv[argc - 1] = NULL;
   } else {
     argv[argc] = NULL;

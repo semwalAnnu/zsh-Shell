@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <wait.h>
+#include <string.h>
+
+void execute(char input[]) {
+
+  char *token;
+  char *saveptr;
+
+  int mode = 0; // 0 for foreground, 1 for background
+
+  token = strtok_r(input, " ", &saveptr);
+
+  pid_t pid = fork();
+
+  if (pid) {
+  }
+}

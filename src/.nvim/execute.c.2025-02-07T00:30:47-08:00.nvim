@@ -15,37 +15,35 @@ void execute(char input[]) {
 
   pid_t pid = fork();
 
-  if (pid == -1) {
-
+  if(pid == -1){
+      
     write(STDERR_FILENO, "shell: unable to fork\n", 22);
+
   }
 
   int argc = 0;
-  char *argv[100];
-  while (token != NULL) {
+  char argv[100];
+  while(token != NULL){
     argv[argc++] = token;
     token = strtok_r(NULL, " ", &saveptr);
   }
 
-  if (argc > 0 && strcmp(argv[argc - 1], "&") == 0) {
-    mode = 1;
-    argv[argc - 1] = NULL;
-  } else {
-    argv[argc] = NULL;
-  }
-
-  if (pid) {
+  if(pid){
     int wstatus = 0;
-    // foreground
-    if (mode == 0) {
-
-      if (waitpid(pid, &wstatus, 0) == -1) {
+    //foreground
+    if(mode == 0){
+      
+      if(waitpid(pid, &wstatus, 0) == -1){
         perror("waitpid");
         exit(EXIT_FAILURE);
       }
-    }
+
+    } 
 
   } else {
+    
+
+
   }
 
   if (pid) {
