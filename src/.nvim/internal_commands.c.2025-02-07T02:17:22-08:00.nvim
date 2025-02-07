@@ -4,12 +4,11 @@
 int check_internal_command(int argc, char **argv) {
 
   char *command = argv[0];
+  printf("%s\n" ,command);
   if (strcmp(command, "exit") == 0) {
     if (argc <= 1) {
-      // printf("exiting\n");
-      clean_zombies();
+      printf("exiting\n");
       exit(0);
-      printf("exited");
     } else {
       const char *msg = FORMAT_MSG("exit", TMA_MSG);
       write(STDERR_FILENO, msg, strlen(msg));

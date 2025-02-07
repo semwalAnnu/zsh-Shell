@@ -6,8 +6,7 @@ int check_internal_command(int argc, char **argv) {
   char *command = argv[0];
   if (strcmp(command, "exit") == 0) {
     if (argc <= 1) {
-      // printf("exiting\n");
-      clean_zombies();
+      //printf("exiting\n");
       exit(0);
       printf("exited");
     } else {

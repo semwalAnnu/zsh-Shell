@@ -34,31 +34,31 @@ void execute(char *input) {
 
   int executed = check_internal_command(argc, argv);
 
-  if (executed == 0) {
-    pid_t pid = fork();
+  if(executed == 0){
+  pid_t pid = fork();
 
-    if (pid < 0) {
-      write(STDERR_FILENO, "shell: unable to fork\n", 22);
-      return;
-    }
+  if (pid < 0) {
+    write(STDERR_FILENO, "shell: unable to fork\n", 22);
+    return;
+  }
 
-    if (pid) {
-      int wstatus = 0;
-      // foreground
-      if (mode == 0) {
-        if (waitpid(pid, &wstatus, 0) == -1) {
-          write(STDERR_FILENO, "shell: unable to wait for children\n", 32);
-          exit(EXIT_FAILURE);
-        }
-      }
-
-    } else {
-
-      if (execvp(argv[0], argv) == -1) {
-        write(STDERR_FILENO, "shell: unable to execute command\n", 33);
+  if (pid) {
+    int wstatus = 0;
+    // foreground
+    if (mode == 0) {
+      if (waitpid(pid, &wstatus, 0) == -1) {
+        write(STDERR_FILENO, "shell: unable to wait for children\n", 32);
         exit(EXIT_FAILURE);
       }
     }
+
+  } else {
+
+    if (execvp(argv[0], argv) == -1) {
+      write(STDERR_FILENO, "shell: unable to execute command\n", 33);
+      exit(EXIT_FAILURE);
+    }
+  }
   }
 }
 
