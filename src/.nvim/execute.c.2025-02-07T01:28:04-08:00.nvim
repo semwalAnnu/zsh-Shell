@@ -57,7 +57,6 @@ void execute(char *input) {
   }
 }
 
-void clean_zombies() {
-  while (waitpid(-1, NULL, WNOHANG) > 0)
-    ;
+void clean_zombies(){
+  while(waitpid(-1, NULL, WNOHANG) > 0);
 }
