@@ -1,0 +1,7 @@
+#include "execute.h"
+
+void check_internal_command(char *input){
+  
+
+
+}

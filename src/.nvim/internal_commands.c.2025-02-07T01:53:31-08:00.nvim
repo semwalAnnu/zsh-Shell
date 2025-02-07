@@ -1,0 +1,15 @@
+#include "execute.h"
+
+void check_internal_command(int *argc, char *argv[]) {
+  
+  char *command = argv[0];
+    
+    if(strcmp(command, "exit")){
+      if(argc == 0){
+        exit(0); 
+      } else {
+      write();
+      }
+    } 
+
+}

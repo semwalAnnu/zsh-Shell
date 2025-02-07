@@ -1,4 +1,3 @@
-#include "execute.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,6 +51,7 @@ void execute(char *input) {
   } else {
 
     if (check_internal_command(argc, argv) == 0) {
+
       if (execvp(argv[0], argv) == -1) {
         write(STDERR_FILENO, "shell: unable to execute command\n", 33);
         exit(EXIT_FAILURE);
