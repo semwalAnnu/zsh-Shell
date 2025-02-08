@@ -42,7 +42,7 @@ int check_internal_command(int argc, char **argv) {
         if (chdir(dir) != 0) {
           const char *msg = FORMAT_MSG("cd", CHDIR_ERROR_MSG);
           write(STDERR_FILENO, msg, strlen(msg));
-        }
+        }       
       } else {
         if (home != NULL) {
           if (chdir(home) != 0) {
@@ -52,8 +52,8 @@ int check_internal_command(int argc, char **argv) {
         }
       }
     } else {
-      const char *msg = FORMAT_MSG("cd", TMA_MSG);
-      write(STDERR_FILENO, msg, strlen(msg));
+          const char *msg = FORMAT_MSG("cd", TMA_MSG);
+          write(STDERR_FILENO, msg, strlen(msg));
     }
 
     return 1;
