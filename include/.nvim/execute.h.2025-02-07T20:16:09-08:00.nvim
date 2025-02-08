@@ -10,5 +10,5 @@
 void execute(char *input);
 void clean_zombies();
 int check_internal_command(int argc, char **argv);
-const char *getHomeDir();
+const char* getHomeDir();
 #endif
