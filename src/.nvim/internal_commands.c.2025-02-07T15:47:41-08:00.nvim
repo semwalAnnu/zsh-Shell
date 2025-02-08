@@ -21,7 +21,6 @@ int check_internal_command(int argc, char **argv) {
       char cwd[1024];
       if (getcwd(cwd, sizeof(cwd)) != NULL) {
         write(STDOUT_FILENO, cwd, strlen(cwd));
-        write(STDOUT_FILENO, "\n", 1);
       } else {
         const char *msg = FORMAT_MSG("pwd", GETCWD_ERROR_MSG);
         write(STDERR_FILENO, msg, strlen(msg));
