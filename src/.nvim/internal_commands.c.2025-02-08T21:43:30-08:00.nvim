@@ -68,7 +68,7 @@ int check_internal_command(int argc, char **argv) {
         } else if (strcmp(argv[1], "-") == 0) {
           if (chdir(prevDir) != 0) {
             const char *msg = FORMAT_MSG("cd", CHDIR_ERROR_MSG);
-            write(STDERR_FILENO, msg, strlen(msg));
+              write(STDERR_FILENO, msg, strlen(msg));
           }
           return 1;
         }
@@ -92,7 +92,7 @@ int check_internal_command(int argc, char **argv) {
       write(STDERR_FILENO, msg, strlen(msg));
     }
 
-    // strcpy(prevDir, cwd);
+    //strcpy(prevDir, cwd);
     return 1;
   }
 
