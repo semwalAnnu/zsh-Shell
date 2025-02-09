@@ -32,7 +32,11 @@ void execute(char *input) {
     return;
   }
 
-  int executed = check_internal_command(argc, argv);
+  char prevDir[1024];
+  if (getcwd(prevDir, sizeof(prevDir)) != 0) {
+    //
+  }
+  int executed = check_internal_command(argc, argv, prevDir);
 
   if (executed == 0) {
     printf("returned 0");
