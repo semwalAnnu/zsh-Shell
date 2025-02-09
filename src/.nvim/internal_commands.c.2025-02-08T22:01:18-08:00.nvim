@@ -94,28 +94,27 @@ int check_internal_command(int argc, char **argv) {
 
     // strcpy(prevDir, cwd);
     return 1;
-  } else if (strcmp(command, "help") == 0) {
-    // write(STDOUT_FILENO, "helping\n", 8);
+  } else if (strcmp(command, "help")) {
+
     if (argc <= 2) {
 
-      char *helpCom = argv[1];
+      char *helpCom = argv[2];
       if (argc == 2) {
 
-        if (strcmp(helpCom, "exit") == 0) {
+        if (strcmp(helpCom, "exit")) {
           const char *msg = FORMAT_MSG("exit", EXIT_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
-        } else if (strcmp(helpCom, "help") == 0) {
+        } else if (strcmp(helpCom, "help")) {
           const char *msg = FORMAT_MSG("help", HELP_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
-        } else if (strcmp(helpCom, "pwd") == 0) {
+        } else if (strcmp(helpCom, "pwd")) {
           const char *msg = FORMAT_MSG("pwd", PWD_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
-        } else if (strcmp(helpCom, "cd") == 0) {
+        } else if (strcmp(helpCom, "cd")) {
           const char *msg = FORMAT_MSG("cd", CD_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
         } else {
-          const char *msg = FORMAT_MSG("", EXTERN_HELP_MSG);
-          write(STDOUT_FILENO, helpCom, strlen(helpCom));
+          const char *msg = FORMAT_MSG("help", EXTERN_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
         }
 
