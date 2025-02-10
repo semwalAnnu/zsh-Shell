@@ -49,21 +49,25 @@ void execute(char *input) {
       int wstatus = 0;
       // foreground
       if (mode == 0) {
-        if (waitpid(pid, &wstatus, 0) == -1) {
+        while (waitpid(pid, &wstatus, 0) == -1) {
           if (errno != EINTR) {
             write(STDERR_FILENO, "shell: unable to wait for children\n", 32);
             exit(EXIT_FAILURE);
+          } else {
+            continue;
           }
         }
       }
 
     } else {
 
-      if (execvp(argv[0], argv) == -1) {
-        if (errno != EINTR) {
+      while (execvp(argv[0], argv) == -1) {
+          if(errno == EINTR){
+            continue;
+      }
+          
           write(STDERR_FILENO, "shell: unable to execute command\n", 33);
           exit(EXIT_FAILURE);
-        }
       }
     }
   }

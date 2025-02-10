@@ -1,11 +1,11 @@
 #include "execute.h"
-#include <errno.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <wait.h>
+#include <errno.h>
 void execute(char *input) {
 
   char *token;
@@ -39,10 +39,8 @@ void execute(char *input) {
     pid_t pid = fork();
 
     if (pid < 0) {
-      if (errno != EINTR) {
-        write(STDERR_FILENO, "shell: unable to fork\n", 22);
-        return;
-      }
+      write(STDERR_FILENO, "shell: unable to fork\n", 22);
+      return;
     }
 
     if (pid) {
@@ -50,19 +48,18 @@ void execute(char *input) {
       // foreground
       if (mode == 0) {
         if (waitpid(pid, &wstatus, 0) == -1) {
-          if (errno != EINTR) {
-            write(STDERR_FILENO, "shell: unable to wait for children\n", 32);
-            exit(EXIT_FAILURE);
-          }
+
+          write(STDERR_FILENO, "shell: unable to wait for children\n", 32);
+          exit(EXIT_FAILURE);
         }
       }
 
     } else {
 
       if (execvp(argv[0], argv) == -1) {
-        if (errno != EINTR) {
-          write(STDERR_FILENO, "shell: unable to execute command\n", 33);
-          exit(EXIT_FAILURE);
+        if(errno != EINTR){
+        write(STDERR_FILENO, "shell: unable to execute command\n", 33);
+        exit(EXIT_FAILURE);
         }
       }
     }

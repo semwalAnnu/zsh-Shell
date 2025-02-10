@@ -23,6 +23,7 @@ void handle_sigint(int signum) {
   const char *msg = FORMAT_MSG("\nhelp", HELP_HELP_MSG);
   write(STDOUT_FILENO, msg, strlen(msg));
   // write(STDOUT_FILENO, "\n", 1);
+  print_cwd();
 }
 
 void registerSignal() {
@@ -47,10 +48,8 @@ int main() {
     ssize_t size = read(STDIN_FILENO, input, 1024);
 
     if (size <= 0) {
-      if (errno != EINTR) {
-        write(STDERR_FILENO, "shell: unable to read command\n", 30);
-        exit(EXIT_FAILURE);
-      }
+      write(STDERR_FILENO, "shell: unable to read command\n", 30);
+      exit(EXIT_FAILURE);
     }
     input[size - 1] = '\0'; //
     execute(input);
