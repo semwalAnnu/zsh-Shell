@@ -113,11 +113,11 @@ int check_internal_command(int argc, char **argv) {
         } else if (strcmp(helpCom, "cd") == 0) {
           const char *msg = FORMAT_MSG("cd", CD_HELP_MSG);
           write(STDOUT_FILENO, msg, strlen(msg));
-        } else if (strcmp(helpCom, "history") == 0) {
+        } else if(strcmp(helpCom, "history")==0){
           const char *msg4 = FORMAT_MSG("history", HISTORY_HELP_MSG);
           write(STDOUT_FILENO, msg4, strlen(msg4));
-
-        } else {
+      
+        }else {
           const char *msg = FORMAT_MSG("", EXTERN_HELP_MSG);
           write(STDOUT_FILENO, helpCom, strlen(helpCom));
           write(STDOUT_FILENO, msg, strlen(msg));
@@ -135,7 +135,7 @@ int check_internal_command(int argc, char **argv) {
 
         const char *msg1 = FORMAT_MSG("help", HELP_HELP_MSG);
         write(STDOUT_FILENO, msg1, strlen(msg1));
-
+ 
         const char *msg4 = FORMAT_MSG("history", HISTORY_HELP_MSG);
         write(STDOUT_FILENO, msg4, strlen(msg4));
       }
