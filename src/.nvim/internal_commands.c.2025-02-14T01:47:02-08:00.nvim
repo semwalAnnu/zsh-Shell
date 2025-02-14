@@ -160,9 +160,12 @@ int check_internal_command(int argc, char **argv) {
       char instance[1024];
       int num = count - i - 1;
       int index = (curr_index - 1 - i + 10) % 10;
-      snprintf(instance, sizeof(instance), "%d \t %s\n", num,
-               last_ten_commands[index]);
+      snprintf(instance, sizeof(instance), "%d \t %s", num, last_ten_commands[index]);
       write(STDOUT_FILENO, instance, strlen(instance));
+      write(STDOUT_FILENO, "          ", 10);
+      write(STDOUT_FILENO, last_ten_commands[index],
+            strlen(last_ten_commands[index]));
+      write(STDOUT_FILENO, "\n", 1);
     }
 
     return 1;
