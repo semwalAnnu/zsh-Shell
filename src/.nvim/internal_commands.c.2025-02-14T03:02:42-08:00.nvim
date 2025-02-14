@@ -183,13 +183,14 @@ int check_internal_command(int argc, char **argv) {
         write(STDOUT_FILENO, last_command, strlen(last_command));
         write(STDOUT_FILENO, "\n", 1);
 
-        if (last_ten_commands[curr_index] != NULL) {
-          free(last_ten_commands[curr_index]);
-        }
-        last_ten_commands[totalCommands % 10] = last_command;
+       if (last_ten_commands[curr_index] != NULL) {
+        free(last_ten_commands[curr_index]);
+      }
+      last_ten_commands[totalCommands % 10] = strdup(last_command);
 
-        totalCommands++;
-        curr_index = (curr_index + 1) % 10;
+      totalCommands++;
+      curr_index = (curr_index + 1) % 10;
+    
 
         execute(last_command);
       }
@@ -217,13 +218,14 @@ int check_internal_command(int argc, char **argv) {
       write(STDOUT_FILENO, last_command, strlen(last_command));
       write(STDOUT_FILENO, "\n", 1);
 
-      if (last_ten_commands[curr_index] != NULL) {
+     if (last_ten_commands[curr_index] != NULL) {
         free(last_ten_commands[curr_index]);
       }
-      last_ten_commands[totalCommands % 10] = last_command;
+      last_ten_commands[totalCommands % 10] = strdup(last_command);
 
       totalCommands++;
       curr_index = (curr_index + 1) % 10;
+    
 
       execute(last_command);
     }
