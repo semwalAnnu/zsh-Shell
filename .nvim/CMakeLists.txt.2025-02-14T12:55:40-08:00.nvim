@@ -19,6 +19,15 @@ FetchContent_Declare(
   DOWNLOAD_EXTRACT_TIMESTAMP false
   URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip)
 FetchContent_MakeAvailable(googletest)
+
+set(CMAKE_BUILD_TYPE Debug)
+add_compile_options(-g)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(shell_test PRIVATE -fsanitize=address)
+    target_link_options(shell_test PRIVATE -fsanitize=address)
+endif()
+
 enable_testing()
 
 add_executable(shell_test gtest/shell_test.cpp)

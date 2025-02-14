@@ -7,6 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(ShellAssignment)
 
 include_directories(include/)
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak,thread -g")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SANITIZER_FLAGS}")
+    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} ${SANITIZER_FLAGS}")
+endif()
+
 file(GLOB SHELL_SOURCES src/*.c)
 
 add_executable(shell ${SHELL_SOURCES})
@@ -19,6 +26,7 @@ FetchContent_Declare(
   DOWNLOAD_EXTRACT_TIMESTAMP false
   URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip)
 FetchContent_MakeAvailable(googletest)
+
 enable_testing()
 
 add_executable(shell_test gtest/shell_test.cpp)
@@ -27,3 +35,7 @@ target_link_libraries(shell_test GTest::gtest_main)
 include(GoogleTest)
 gtest_discover_tests(shell_test)
 
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    target_compile_options(shell_test PRIVATE ${SANITIZER_FLAGS})
+    target_link_libraries(shell_test PRIVATE ${SANITIZER_FLAGS})
+endif()

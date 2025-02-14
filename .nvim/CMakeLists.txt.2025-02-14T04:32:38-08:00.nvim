@@ -19,6 +19,7 @@ FetchContent_Declare(
   DOWNLOAD_EXTRACT_TIMESTAMP false
   URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip)
 FetchContent_MakeAvailable(googletest)
+
 enable_testing()
 
 add_executable(shell_test gtest/shell_test.cpp)
@@ -27,3 +28,8 @@ target_link_libraries(shell_test GTest::gtest_main)
 include(GoogleTest)
 gtest_discover_tests(shell_test)
 
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    # Add AddressSanitizer and UndefinedBehaviorSanitizer
+    target_compile_options(shell_test PRIVATE -fsanitize=address,undefined)
+    target_link_options(shell_test PRIVATE -fsanitize=address,undefined)
+endif()

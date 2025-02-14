@@ -173,7 +173,7 @@ int check_internal_command(int argc, char **argv) {
     strcpy(argument, &argv[0][1]);
 
     if (argument[0] == '!') {
-      printf("THIS: %s\n", argument);
+
       if (totalCommands < 1) {
         const char *msg = FORMAT_MSG("history", HISTORY_NO_LAST_MSG);
         write(STDOUT_FILENO, msg, strlen(msg));
@@ -201,20 +201,22 @@ int check_internal_command(int argc, char **argv) {
       const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
       write(STDOUT_FILENO, msg, strlen(msg));
       if (last_ten_commands[curr_index] != NULL) {
-        free(last_ten_commands[curr_index]);
-      }
-      last_ten_commands[curr_index] = strdup(argv[0]);
-      totalCommands++;
-      curr_index = (curr_index + 1) % 10;
+      free(last_ten_commands[curr_index]);
+    }
+
+    last_ten_commands[curr_index] = strdup(argv[0]);
+    totalCommands++;
+    curr_index = (curr_index + 1) % 10;
+
 
       return 1;
+   
     }
 
     int min_index = 0;
     if (totalCommands > 10) {
-      min_index = totalCommands - 10;
+     min_index = totalCommands - 10;
     }
-    printf("NOT: %s\n", argument);
 
     int n = atoi(argument);
     if (n >= totalCommands || n < min_index) {

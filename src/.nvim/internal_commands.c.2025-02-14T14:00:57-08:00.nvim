@@ -173,7 +173,7 @@ int check_internal_command(int argc, char **argv) {
     strcpy(argument, &argv[0][1]);
 
     if (argument[0] == '!') {
-      printf("THIS: %s\n", argument);
+
       if (totalCommands < 1) {
         const char *msg = FORMAT_MSG("history", HISTORY_NO_LAST_MSG);
         write(STDOUT_FILENO, msg, strlen(msg));
@@ -200,43 +200,36 @@ int check_internal_command(int argc, char **argv) {
     if (!is_number(argument)) {
       const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
       write(STDOUT_FILENO, msg, strlen(msg));
+      return 1;
+    }
+
+      int min_index = 0;
+      if (totalCommands > 10) {
+        min_index = totalCommands - 10;
+      }
+
+      int n = atoi(argument);
+      if (n >= totalCommands || n < min_index) {
+        const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
+        write(STDOUT_FILENO, msg, strlen(msg));
+        return 1;
+      }
+
+      char *last_command = strdup(last_ten_commands[(n % 10)]);
+      write(STDOUT_FILENO, last_command, strlen(last_command));
+      write(STDOUT_FILENO, "\n", 1);
+
       if (last_ten_commands[curr_index] != NULL) {
         free(last_ten_commands[curr_index]);
       }
-      last_ten_commands[curr_index] = strdup(argv[0]);
+
+      last_ten_commands[curr_index] = strdup(last_command);
       totalCommands++;
       curr_index = (curr_index + 1) % 10;
 
-      return 1;
-    }
-
-    int min_index = 0;
-    if (totalCommands > 10) {
-      min_index = totalCommands - 10;
-    }
-    printf("NOT: %s\n", argument);
-
-    int n = atoi(argument);
-    if (n >= totalCommands || n < min_index) {
-      const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
-      write(STDOUT_FILENO, msg, strlen(msg));
-      return 1;
-    }
-
-    char *last_command = strdup(last_ten_commands[(n % 10)]);
-    write(STDOUT_FILENO, last_command, strlen(last_command));
-    write(STDOUT_FILENO, "\n", 1);
-
-    if (last_ten_commands[curr_index] != NULL) {
-      free(last_ten_commands[curr_index]);
-    }
-
-    last_ten_commands[curr_index] = strdup(last_command);
-    totalCommands++;
-    curr_index = (curr_index + 1) % 10;
-
-    execute(last_command);
-    free(last_command);
+      execute(last_command);
+      free(last_command);
+    
 
     return 1;
   }

@@ -62,13 +62,16 @@ int main() {
     }
     input[size - 1] = '\0'; //
 
-    if (input[0] != '!') {
+    if (strcmp(input, "!") != 0) {
       if (last_ten_commands[curr_index] != NULL) {
         free(last_ten_commands[curr_index]);
       }
       last_ten_commands[totalCommands % 10] = strdup(input);
-      totalCommands++;
-      curr_index = (curr_index + 1) % 10;
+
+      if (input[0] != '!') {
+        totalCommands++;
+        curr_index = (curr_index + 1) % 10;
+      }
     }
     execute(input);
     clean_zombies();

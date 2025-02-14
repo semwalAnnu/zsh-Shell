@@ -22,6 +22,12 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(shell_test gtest/shell_test.cpp)
+
+if (CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(shell_test PRIVATE -fsanitize=address)
+    target_link_options(shell_test PRIVATE -fsanitize=address)
+endif()
+
 target_link_libraries(shell_test GTest::gtest_main)
 
 include(GoogleTest)
