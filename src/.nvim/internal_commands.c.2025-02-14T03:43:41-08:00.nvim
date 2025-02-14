@@ -214,13 +214,15 @@ int check_internal_command(int argc, char **argv) {
         return 1;
       }
 
-      char *last_command = strdup(last_ten_commands[(n % 10)]);
+      char *last_command = strdup(last_ten_commands[(n % 10)-1]);
       write(STDOUT_FILENO, last_command, strlen(last_command));
       write(STDOUT_FILENO, "\n", 1);
 
-      free(last_ten_commands[curr_index - 1]);
+    
+      free(last_ten_commands[curr_index-1]);
+      
+      last_ten_commands[curr_index] = strdup(last_command);
 
-      last_ten_commands[curr_index - 1] = strdup(last_command);
 
       execute(last_command);
       free(last_command);

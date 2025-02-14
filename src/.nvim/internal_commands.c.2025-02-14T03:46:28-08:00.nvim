@@ -220,7 +220,7 @@ int check_internal_command(int argc, char **argv) {
 
       free(last_ten_commands[curr_index - 1]);
 
-      last_ten_commands[curr_index - 1] = strdup(last_command);
+      last_ten_commands[curr_index-1] = strdup(last_command);
 
       execute(last_command);
       free(last_command);
