@@ -11,10 +11,6 @@ void execute(char *input) {
   char *token;
   char *saveptr;
 
-  if ((input[0] != '!')) {
-    store_command(input);
-  }
-
   int mode = 0; // 0 for foreground, 1 for background
 
   token = strtok_r(input, " ", &saveptr);
@@ -77,3 +73,4 @@ void clean_zombies() {
   while (waitpid(-1, NULL, WNOHANG) > 0)
     ;
 }
+

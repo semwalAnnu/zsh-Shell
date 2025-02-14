@@ -13,6 +13,7 @@ void execute(char *input) {
 
   if ((input[0] != '!')) {
     store_command(input);
+    printf("INP: %s\n", input);
   }
 
   int mode = 0; // 0 for foreground, 1 for background
@@ -60,14 +61,13 @@ void execute(char *input) {
           }
         }
       }
+    }
+  } else {
 
-    } else {
-
-      if (execvp(argv[0], argv) == -1) {
-        if (errno != EINTR) {
-          write(STDERR_FILENO, "shell: unable to execute command\n", 33);
-          exit(EXIT_FAILURE);
-        }
+    if (execvp(argv[0], argv) == -1) {
+      if (errno != EINTR) {
+        write(STDERR_FILENO, "shell: unable to execute command\n", 33);
+        exit(EXIT_FAILURE);
       }
     }
   }

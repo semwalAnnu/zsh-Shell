@@ -11,9 +11,11 @@ void execute(char *input) {
   char *token;
   char *saveptr;
 
-  if ((input[0] != '!')) {
+    if ((input[0] != '!')) {
     store_command(input);
+    printf("INP: %s\n", input);
   }
+ 
 
   int mode = 0; // 0 for foreground, 1 for background
 
@@ -37,6 +39,7 @@ void execute(char *input) {
     return;
   }
 
+  }
   int executed = check_internal_command(argc, argv);
 
   if (executed == 0) {

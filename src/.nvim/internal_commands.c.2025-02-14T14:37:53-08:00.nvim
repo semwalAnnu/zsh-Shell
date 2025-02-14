@@ -182,9 +182,7 @@ int check_internal_command(int argc, char **argv) {
             strdup(last_ten_commands[(totalCommands - 1) % 10]);
         write(STDOUT_FILENO, last_command, strlen(last_command));
         write(STDOUT_FILENO, "\n", 1);
-        if (last_command[0] == '!') {
-          store_command(last_command);
-        }
+        store_command(last_command);
         execute(last_command);
         free(last_command);
       }

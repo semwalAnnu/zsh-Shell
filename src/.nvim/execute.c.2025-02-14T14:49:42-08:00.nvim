@@ -11,10 +11,6 @@ void execute(char *input) {
   char *token;
   char *saveptr;
 
-  if ((input[0] != '!')) {
-    store_command(input);
-  }
-
   int mode = 0; // 0 for foreground, 1 for background
 
   token = strtok_r(input, " ", &saveptr);
@@ -32,11 +28,16 @@ void execute(char *input) {
   } else {
     argv[argc] = NULL;
   }
+  printf("INP BEF: %s\n", input);
 
   if (argv[0] == NULL) {
     return;
   }
 
+  if ((argv[0][0] != '!')) {
+    store_command(input);
+    printf("INP: %s\n", input);
+  }
   int executed = check_internal_command(argc, argv);
 
   if (executed == 0) {

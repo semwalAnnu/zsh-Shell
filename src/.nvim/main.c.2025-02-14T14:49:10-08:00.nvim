@@ -71,7 +71,8 @@ int main() {
       }
     }
     input[size - 1] = '\0'; //
-
+    
+    printf("IPT MAIN: %s\n", input);
     execute(input);
     clean_zombies();
   }

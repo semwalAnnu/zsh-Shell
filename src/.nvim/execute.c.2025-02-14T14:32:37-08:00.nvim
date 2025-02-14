@@ -11,10 +11,6 @@ void execute(char *input) {
   char *token;
   char *saveptr;
 
-  if ((input[0] != '!')) {
-    store_command(input);
-  }
-
   int mode = 0; // 0 for foreground, 1 for background
 
   token = strtok_r(input, " ", &saveptr);
@@ -41,6 +37,7 @@ void execute(char *input) {
 
   if (executed == 0) {
     pid_t pid = fork();
+    store_command(input);
 
     if (pid < 0) {
       if (errno != EINTR) {

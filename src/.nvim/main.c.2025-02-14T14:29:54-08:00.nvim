@@ -31,14 +31,15 @@ void handle_sigint(int signum) {
   // write(STDOUT_FILENO, "\n", 1);
 }
 
-void store_command(char *command) {
+void store_command(char *command){
 
-  if (last_ten_commands[curr_index] != NULL) {
-    free(last_ten_commands[curr_index]);
-  }
-  last_ten_commands[totalCommands % 10] = strdup(command);
-  totalCommands++;
-  curr_index = (curr_index + 1) % 10;
+ if (last_ten_commands[curr_index] != NULL) {
+        free(last_ten_commands[curr_index]);
+      }
+      last_ten_commands[totalCommands % 10] = strdup(command);
+      totalCommands++;
+      curr_index = (curr_index + 1) % 10;
+    
 }
 
 void registerSignal() {
@@ -72,6 +73,7 @@ int main() {
     }
     input[size - 1] = '\0'; //
 
+  
     execute(input);
     clean_zombies();
   }
