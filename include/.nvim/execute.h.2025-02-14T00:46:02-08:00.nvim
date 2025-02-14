@@ -7,6 +7,10 @@
 #include <unistd.h>
 #include <wait.h>
 
+char *last_ten_commands[10];
+int curr_index;
+int totalCommands;
+
 void execute(char *input);
 void clean_zombies();
 int check_internal_command(int argc, char **argv);

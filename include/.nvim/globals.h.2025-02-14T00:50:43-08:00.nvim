@@ -1,0 +1,12 @@
+#ifndef GLOBALS_H
+#define GLOBALS_H
+
+#include <string.h>
+#include <unistd.h>
+#include <wait.h>
+
+char *last_ten_commands[10];
+int curr_index;
+int totalCommands;
+
+#endif

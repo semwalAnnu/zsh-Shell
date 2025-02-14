@@ -1,6 +1,6 @@
 #include "execute.h"
-#include "globals.h"
 #include "msgs.h"
+#include "globals.h"
 #include <pwd.h>
 
 char prevDir[1024] = ".";

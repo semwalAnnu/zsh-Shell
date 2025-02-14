@@ -1,5 +1,4 @@
 #include "execute.h"
-#include "globals.h"
 #include "msgs.h"
 #include <pwd.h>
 
