@@ -200,8 +200,6 @@ int check_internal_command(int argc, char **argv) {
     if (!is_number(argument)) {
       const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
       write(STDOUT_FILENO, msg, strlen(msg));
-      totalCommands++;
-      curr_index = (curr_index + 1) % 10;
     } else {
 
       int min_index = 0;
@@ -213,6 +211,7 @@ int check_internal_command(int argc, char **argv) {
       if (n >= totalCommands || n < min_index) {
         const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
         write(STDOUT_FILENO, msg, strlen(msg));
+
         return 1;
       }
 
@@ -220,13 +219,11 @@ int check_internal_command(int argc, char **argv) {
       write(STDOUT_FILENO, last_command, strlen(last_command));
       write(STDOUT_FILENO, "\n", 1);
 
-      if (last_ten_commands[curr_index] != NULL) {
-        free(last_ten_commands[curr_index]);
+      if(last_ten_commands[curr_index -1] != NULL){
+      free(last_ten_commands[curr_index - 1]);
       }
 
-      last_ten_commands[curr_index] = strdup(last_command);
-      totalCommands++;
-      curr_index = (curr_index + 1) % 10;
+      last_ten_commands[curr_index - 1] = strdup(last_command);
 
       execute(last_command);
       free(last_command);
