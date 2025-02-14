@@ -158,7 +158,7 @@ int check_internal_command(int argc, char **argv) {
 
     for (int i = 0; i < count; i++) {
       char instance[20];
-      int num = count - i - 1;
+      int num = count - i -1;
       snprintf(instance, sizeof(instance), "%d", num);
       write(STDOUT_FILENO, instance, strlen(instance));
       write(STDOUT_FILENO, "          ", 10);
