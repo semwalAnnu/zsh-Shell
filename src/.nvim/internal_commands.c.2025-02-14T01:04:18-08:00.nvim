@@ -151,22 +151,19 @@ int check_internal_command(int argc, char **argv) {
   } else if (strcmp(command, "history") == 0) {
     int start, count;
     if (totalCommands >= 10) {
-      start = curr_index % 10;
-      count = 10;
+      start = curr_index % 5;
+      count = 5;
     } else {
       start = 0;
       count = totalCommands;
     }
 
     for (int i = 0; i < count; i++) {
-      char instance[20];
-      int num = i;
-      snprintf(instance, sizeof(instance), "%d", num);
-      write(STDOUT_FILENO, instance, strlen(instance));
-      write(STDOUT_FILENO, "          ", 10);
-      write(STDOUT_FILENO, last_ten_commands[(start + i) % 10],
-            strlen(last_ten_commands[(start + i) % 10]));
-      write(STDOUT_FILENO, "\n", 1);
+      const char *curr_input = last_ten_commands[start + i];
+      const char instance[20];
+      int num = totalCommands - count;
+      snprintf(instance, sizeof(instance) , "%d", num);
+      write(STDOUT_FILENO, curr_input, strlen(curr_input));
     }
 
     return 1;

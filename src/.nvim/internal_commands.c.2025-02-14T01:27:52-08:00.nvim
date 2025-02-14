@@ -164,8 +164,7 @@ int check_internal_command(int argc, char **argv) {
       snprintf(instance, sizeof(instance), "%d", num);
       write(STDOUT_FILENO, instance, strlen(instance));
       write(STDOUT_FILENO, "          ", 10);
-      write(STDOUT_FILENO, last_ten_commands[(start + i) % 10],
-            strlen(last_ten_commands[(start + i) % 10]));
+      write(STDOUT_FILENO, last_ten_commands[(start+i)%10], strlen(last_ten_commands[(start+i)%10]));
       write(STDOUT_FILENO, "\n", 1);
     }
 

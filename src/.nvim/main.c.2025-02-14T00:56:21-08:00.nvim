@@ -10,7 +10,7 @@
 
 int curr_index = 0;
 int totalCommands = 0;
-char *last_ten_commands[10] = {NULL};
+char* last_ten_commands[10] = {NULL};
 
 void print_cwd() {
 

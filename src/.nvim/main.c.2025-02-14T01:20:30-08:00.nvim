@@ -62,6 +62,7 @@ int main() {
     }
     input[size - 1] = '\0'; //
     last_ten_commands[totalCommands % 10] = input;
+    write(STDOUT_FILENO, last_ten_commands[totalCommands%10], strlen(last_ten_commands[totalCommands%10]));
     totalCommands++;
     curr_index = (curr_index + 1) % 10;
     execute(input);
