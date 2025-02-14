@@ -7,6 +7,10 @@
 #include <string.h>
 #include <unistd.h>
 
+char *last_ten_commands[10];
+int totalCommands = 0;
+int current_index = 0;
+
 void print_cwd() {
 
   char cwd[1024];
@@ -43,8 +47,6 @@ int main() {
 
   char input[1024];
   registerSignal();
-  curr_index = 0;
-  totalCommands = 0;
   while (1) {
     print_cwd();
     ssize_t size = read(STDIN_FILENO, input, 1024);
@@ -58,7 +60,7 @@ int main() {
     input[size - 1] = '\0'; //
     last_ten_commands[totalCommands % 10] = input;
     totalCommands++;
-    curr_index = (curr_index + 1) % 10;
+    current_index = (current_index + 1) %10;
     execute(input);
     clean_zombies();
   }

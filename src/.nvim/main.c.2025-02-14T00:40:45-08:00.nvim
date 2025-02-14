@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 
+
 void print_cwd() {
 
   char cwd[1024];
@@ -58,7 +59,7 @@ int main() {
     input[size - 1] = '\0'; //
     last_ten_commands[totalCommands % 10] = input;
     totalCommands++;
-    curr_index = (curr_index + 1) % 10;
+    current_index = (current_index + 1) % 10;
     execute(input);
     clean_zombies();
   }

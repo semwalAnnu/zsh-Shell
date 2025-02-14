@@ -1,6 +1,6 @@
 #include "execute.h"
-#include "main.c"
 #include "msgs.h"
+#include "main.c"
 #include <pwd.h>
 
 char prevDir[1024] = ".";
@@ -147,20 +147,13 @@ int check_internal_command(int argc, char **argv) {
     }
 
     return 1;
-  } else if (strcmp(command, "history") == 0) {
-    int start, count;
-    if (totalCommands >= 10) {
-      start = curr_index % 5;
-      count = 5;
-    } else {
-      start = 0;
-      count = totalCommands;
+  } else if (strcmp(command, "history") == 0){
+    
+    if(totalCommands > 10)
+    while(int i = 0; i < 10; i++){
+     const char *curr_command = last_ten_commands[i]
     }
-
-    for (int i = 0; i < count; i++) {
-      const char *curr_input = last_ten_commands[start + i];
-      write(STDOUT_FILENO, curr_input, strlen(curr_input));
-    }
+  }
 
     return 1;
   }
