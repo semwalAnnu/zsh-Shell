@@ -13,5 +13,5 @@ int check_internal_command(int argc, char **argv);
 const char *getHomeDir();
 void handle_sigint(int signum);
 void registerSignal();
-int is_number(const char *str);
+int is_number(const char* str);
 #endif

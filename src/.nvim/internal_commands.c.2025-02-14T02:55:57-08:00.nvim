@@ -191,11 +191,13 @@ int check_internal_command(int argc, char **argv) {
       const char *msg = FORMAT_MSG("history", HISTORY_INVALID_MSG);
       write(STDOUT_FILENO, msg, strlen(msg));
     } else {
+     
 
-      int min_index = 0;
-      if (totalCommands > 10) {
-        min_index = totalCommands - 10;
+     int min_index = 0;
+      if(totalCommands > 10){
+        min_index = totalCommands - 10;  
       }
+
 
       int n = atoi(argument);
       if (n >= totalCommands || n < min_index) {
@@ -204,10 +206,13 @@ int check_internal_command(int argc, char **argv) {
         return 1;
       }
 
-      char *last_command = last_ten_commands[(n % 10)];
-      write(STDOUT_FILENO, last_command, strlen(last_command));
-      write(STDOUT_FILENO, "\n", 1);
-      execute(last_command);
+      
+      
+      }
+
+    
+
+
     }
 
     return 1;

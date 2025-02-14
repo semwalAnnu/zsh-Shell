@@ -203,11 +203,12 @@ int check_internal_command(int argc, char **argv) {
         write(STDOUT_FILENO, msg, strlen(msg));
         return 1;
       }
-
-      char *last_command = last_ten_commands[(n % 10)];
-      write(STDOUT_FILENO, last_command, strlen(last_command));
-      write(STDOUT_FILENO, "\n", 1);
-      execute(last_command);
+      
+        char *last_command = last_ten_commands[(n%10)];
+        write(STDOUT_FILENO, last_command, strlen(last_command));
+        write(STDOUT_FILENO, "\n", 1);
+        execute(last_command);
+      
     }
 
     return 1;
