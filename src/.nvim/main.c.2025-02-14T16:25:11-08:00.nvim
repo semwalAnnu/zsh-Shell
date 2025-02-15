@@ -27,20 +27,8 @@ void print_cwd() {
 }
 
 void handle_sigint(int signum) {
-  const char *msg = FORMAT_MSG("\nexit", EXIT_HELP_MSG);
+  const char *msg = FORMAT_MSG("\nhelp", HELP_HELP_MSG);
   write(STDOUT_FILENO, msg, strlen(msg));
-
-  const char *msg2 = FORMAT_MSG("pwd", PWD_HELP_MSG);
-  write(STDOUT_FILENO, msg2, strlen(msg2));
-
-  const char *msg3 = FORMAT_MSG("cd", CD_HELP_MSG);
-  write(STDOUT_FILENO, msg3, strlen(msg3));
-
-  const char *msg1 = FORMAT_MSG("help", HELP_HELP_MSG);
-  write(STDOUT_FILENO, msg1, strlen(msg1));
-
-  const char *msg4 = FORMAT_MSG("history", HISTORY_HELP_MSG);
-  write(STDOUT_FILENO, msg4, strlen(msg4));
   CTRL_C = 1;
   // write(STDOUT_FILENO, "\n", 1);
 }
