@@ -3,7 +3,7 @@
 
 #include <string.h>
 #include <unistd.h>
-#include <wait.h>
+#include <sys/wait.h>
 
 extern char *last_ten_commands[10];
 extern int curr_index;
